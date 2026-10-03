@@ -19,6 +19,52 @@
             //c)  Can a class inherit from multiple abstract classes? Can it implement multiple interfaces?
             // A class cannot inherit from multiple abstract classes due to C#'s single inheritance model. However, a class can implement multiple interfaces, allowing it to inherit behavior from multiple sources.
             #endregion
+            #region Part 02 — Practical
+            // Address initialization
+            DeliveryAddress address = new DeliveryAddress();
+           
+            // a. Create one StandardShipment
+            StandardShipment standard = new StandardShipment("SH001", "Laptop", 3m, 80m, address);
+
+            // b. Create one ExpressShipment (Extra Fee = 30 EGP based on expected output)
+            ExpressShipment express = new ExpressShipment("SH002", "Documents", 1m, 70m, address, 30m);
+
+            // c. Create one InternationalShipment
+            InternationalShipment international = new InternationalShipment("SH003", "Germany", 5m, 200m, address);
+
+            // d. Add all shipments to the DeliveryCenter
+            DeliveryCenter center = new DeliveryCenter("Cairo Central Hub");
+            center.AddShipment(standard);
+            center.AddShipment(express);
+            center.AddShipment(international);
+
+            // e. Print all shipment details
+            Console.WriteLine("--------------------------------------------------");
+            Console.WriteLine("Delivery Center");
+            Console.WriteLine("--------------------------------------------------");
+            center.PrintAllShipments();
+
+            // f. Print the tracking status of every shipment
+            Console.WriteLine("\n--------------------------------------------------");
+            Console.WriteLine("Tracking Status");
+            Console.WriteLine("--------------------------------------------------");
+            center.PrintTrackingStatus();
+
+            // g. Print the insurance cost of every shipment
+            Console.WriteLine("\n--------------------------------------------------");
+            Console.WriteLine("Insurance");
+            Console.WriteLine("--------------------------------------------------");
+            DeliveryReport.PrintInsurance(standard);
+            DeliveryReport.PrintInsurance(express);
+            DeliveryReport.PrintInsurance(international);
+
+            // h & i. Polymorphism arrays
+            ITrackable[] trackableShipments = new ITrackable[] { standard, express, international };
+            IInsurable[] insurableShipments = new IInsurable[] { standard, express, international };
+
+            Console.WriteLine("\nInterface Polymorphism Demonstrated Successfully.");
+
+            #endregion
         }
     }
 }
